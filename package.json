@@ -1,0 +1,27 @@
+{
+  "name": "e30a5946-24ec-4a76-8702-3d8d04f12421",
+  "version": "1.0.0",
+  "description": "Simple assessment reporting system",
+  "main": "src/index.js",
+  "scripts": {
+    "app": "node index.js",
+    "start:dev": "nodemon index.js",
+    "start:debug": "DEBUG=e30a5946-24ec-4a76-8702-3d8d04f12421:* & npm run start:dev",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src"
+  },
+  "keywords": [],
+  "author": "Veronica Hurtado",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin-js": "^1.5.3",
+    "eslint": "^8.56.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.2"
+  }
+}
