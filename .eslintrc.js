@@ -5,7 +5,7 @@ module.exports = {
         es2021: true
     },
     extends: [
-        'eslint:recommended'
+        'eslint:recommended', 'plugin:n/recommended', 'plugin:promise/recommended'
     ],
     overrides: [
         {
@@ -27,7 +27,6 @@ module.exports = {
         '@stylistic/js'
     ],
     rules: {
-        '@stylistic/js/indent': ['error', 4],
         '@stylistic/js/quotes': ['error', 'single', { avoidEscape: true }]
     }
 }
