@@ -1,0 +1,8 @@
+[studentName] recently completed [assessmentTitle] assessment on [assessmentCompletedDateTime].
+He got [correctAnswersNumber] questions right out of [questionsNumber]. Details by strand given below:
+
+Numeracy and Algebra: 5 out of 5 correct
+Measurement and Geometry: 7 out of 7 correct
+Statistics and Probability: 3 out of 4 correct
+
+[feedbackByStrand]

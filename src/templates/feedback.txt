@@ -1,0 +1,4 @@
+[studentName] recently completed [assessmentTitle] assessment on [assessmentCompletedDateTime].
+He got [correctAnswersNumber] questions right out of [questionsNumber]. Feedback for wrong answers given below:
+
+[feedbackByQuestion]
