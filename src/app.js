@@ -1,4 +1,8 @@
 const inquirer = require('inquirer');
+const {
+    getStudent,
+    getAssessmentsByStudent
+} = require('./queries');
 
 const questions = [
     {
@@ -14,8 +18,12 @@ const questions = [
     },
 ];
 
-const diagnostic = () => {
-    console.log('diagnostic ran!');
+const diagnostic = async (studentId) => {
+    // ToDo: Handle "Student not found, please provide a diff Id"
+    const student = await getStudent(studentId);
+    const assessments = await getAssessmentsByStudent(studentId, queryParams);
+
+    console.log('diagnostic ran!', { student, assessments });
 }
 
 const feedback = () => {
@@ -34,8 +42,8 @@ const reports = {
 
 const processAnswers = (answers) => {
     const { studentId, reportNumber } = answers;
-    console.log({ studentId, reportNumber });
-    reports[reportNumber.toLowerCase()]();
+    //ToDo: Validate studentId
+    reports[reportNumber.toLowerCase()](studentId);
 };
 
 const init = () => {
@@ -44,6 +52,8 @@ const init = () => {
         .catch(err => console.log(err));
 };
 
-module.exports = {
-    init
-};
+init();
+
+// module.exports = {
+//     init
+// };

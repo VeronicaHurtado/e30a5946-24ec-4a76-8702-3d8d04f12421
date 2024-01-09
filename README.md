@@ -29,6 +29,7 @@ on how to answer these questions correctly.
 
 ## Suggested enhancements
 - Enforce authentication to access the data via middleware.
+- Enforce SSL for Production.
 - Add pagination to resources.
 - Move error messages to constants and use a middleware for error handling.
 - Handle logs via middleware.
@@ -36,12 +37,15 @@ on how to answer these questions correctly.
 - Sanitise/validate User input.
 - Accessibility
 - CLI best practices
+- Change structure for a more clear separation of concerns: API vs Web/App
 
 ### Useful articles
 - [Command-Line Interfaces: Structure & Syntax](https://dev.to/paulasantamaria/command-line-interfaces-structure-syntax-2533)
+- [7 Best Approach of Protecting Routes in Node.js Every Senior Engineer Suggests](https://medium.com/@vikramgyawali57/7-best-approach-of-protecting-routes-in-node-js-every-senior-engineer-suggests-fc32b7777827)
 
 ## Snyk Advisor
 - [express](https://snyk.io/advisor/npm-package/express)
 - [inquirer](https://snyk.io/advisor/npm-package/inquirer)
 - [nodemon](https://snyk.io/advisor/npm-package/nodemon)
 - [eslint](https://snyk.io/advisor/npm-package/eslint)
+- [body-parser](https://snyk.io/advisor/npm-package/body-parser)

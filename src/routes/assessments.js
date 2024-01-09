@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const dataUtils = require('../utils/data.util');
-const source = 'assessments.json';
-router.get('/', async function(req, res) {
-    const assessments = await dataUtils.readFile(source);
-    console.log({ assessments });
-    res.json({ assessments });
-});
+const {
+    getAssessments,
+    getAssessmentsByStudent
+} = require('../controllers/assessmentController');
+
+router.get('/', getAssessments);
+
+router.get('/student/:studentId', getAssessmentsByStudent);
 
 module.exports = router;

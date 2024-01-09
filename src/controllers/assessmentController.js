@@ -1,22 +1,23 @@
-const service = require('../services/studentService');
-const getStudents = async (req, res) => {
+const service = require('../services/assessmentService');
+
+const getAssessments = async (req, res) => {
     //ToDo: Pagination
     try {
-        const students = await service.getStudents();
+        const assessments = await service.getAssessments();
         return res
             .status(200)
-            .send({ status: 'OK', data: students });
+            .send({ status: 'OK', data: assessments });
     } catch (err) {
         return res
             .status(err?.status || 500)
             .send({ status: 'FAILED', error: err?.message || err });
     }
 }
-
-const getStudent = async (req, res) => {
+const getAssessmentsByStudent = async (req, res) => {
     //ToDo: Sanitise request params
     try {
         const { studentId } = req.params;
+        const { sortByDate, lastRecordOnly } = req.query;
 
         if (!studentId) {
             return res
@@ -24,15 +25,9 @@ const getStudent = async (req, res) => {
                 .send({ status: 'FAILED', error: "Parameter ':studentId' cannot be empty" });
         }
 
-        const student = await service.getStudent(studentId);
+        const studentResponses = await service.getAssessmentsByStudent(studentId, { sortByDate, lastRecordOnly });
 
-        if (!student) {
-            return res
-                .status(404)
-                .send({ status: 'FAILED', error: 'Student not found' });
-        }
-
-        return res.status(200).send({ status: 'OK', data: student });
+        return res.status(200).send({ status: 'OK', data: studentResponses });
     } catch (err) {
         return res
             .status(err?.status || 500)
@@ -41,6 +36,6 @@ const getStudent = async (req, res) => {
 }
 
 module.exports = {
-    getStudents,
-    getStudent
+    getAssessments,
+    getAssessmentsByStudent
 }

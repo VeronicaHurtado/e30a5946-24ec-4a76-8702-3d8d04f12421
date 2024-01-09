@@ -10,6 +10,11 @@ const readFile = async (fileName) => {
     });
 };
 
+const sortArrayByObjectDateProperty = (array, propertyName) => {
+    return  array.sort((a, b) => a[`${propertyName}`] - b[`${propertyName}`]);
+}
+
 module.exports = {
-    readFile
+    readFile,
+    sortArrayByObjectDateProperty
 }
