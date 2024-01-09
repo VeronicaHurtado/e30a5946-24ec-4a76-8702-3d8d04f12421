@@ -2,10 +2,10 @@
   "name": "e30a5946-24ec-4a76-8702-3d8d04f12421",
   "version": "1.0.0",
   "description": "Simple assessment reporting system",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "app": "node ./src/index.js",
-    "start:dev": "nodemon ./src/index.js",
+    "app": "node index.js",
+    "start:dev": "nodemon index.js",
     "start:debug": "DEBUG=e30a5946-24ec-4a76-8702-3d8d04f12421:* & npm run start:dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src"

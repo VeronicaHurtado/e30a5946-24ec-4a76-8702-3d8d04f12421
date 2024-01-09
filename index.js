@@ -1,5 +1,5 @@
-require('./app');
-const reporter = require('./main');
+require('./src/server');
+const reporter = require('./src/app');
 setTimeout(() => {
     reporter.init();
 }, 1000);

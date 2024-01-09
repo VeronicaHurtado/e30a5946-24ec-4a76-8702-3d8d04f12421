@@ -1,21 +1,49 @@
-const express = require('express');
-const indexRouter = require('./routes/index');
-const assessmentsRouter = require('./routes/assessments');
-const questionsRouter = require('./routes/questions');
-const studentsRouter = require('./routes/students');
+const inquirer = require('inquirer');
 
-const app = express();
-const port = 3000;
+const questions = [
+    {
+        type: 'input',
+        name: 'studentId',
+        message: 'Please type the Student Id',
+    },
+    {
+        type: 'list',
+        name: 'reportNumber',
+        message: 'Please select the Report you wish to generate',
+        choices: ['Diagnostic', 'Progress', 'Feedback'],
+    },
+];
 
-app.use('/', indexRouter);
-app.use('/assessments', assessmentsRouter);
-app.use('/questions', questionsRouter);
-app.use('/students', studentsRouter);
+const diagnostic = () => {
+    console.log('diagnostic ran!');
+}
 
-// ToDo: Guard middleware to restrict access to data
+const feedback = () => {
+    console.log('feedback ran!');
+}
 
-app.listen(port, () => {
-    console.log(`Simple assessment reporting system listening on port ${port}`)
-});
+const progress = () => {
+    console.log('progress ran!');
+}
 
-module.exports = app;
+const reports = {
+    'diagnostic': diagnostic,
+    'progress': progress,
+    'feedback': feedback,
+};
+
+const processAnswers = (answers) => {
+    const { studentId, reportNumber } = answers;
+    console.log({ studentId, reportNumber });
+    reports[reportNumber.toLowerCase()]();
+};
+
+const init = () => {
+    inquirer.prompt(questions)
+        .then(answers => processAnswers(answers))
+        .catch(err => console.log(err));
+};
+
+module.exports = {
+    init
+};
