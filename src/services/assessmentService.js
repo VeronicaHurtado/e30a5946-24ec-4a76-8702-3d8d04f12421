@@ -5,10 +5,18 @@ const studentResponsesFile = 'student-responses.json';
 const getAssessments = async() => {
     return await dataUtils.readFile(assessmentsFile);
 };
+
+const getAssessment = async(assessmentId) => {
+    const assessments = await dataUtils.readFile(assessmentsFile);
+
+    return assessments.find(assessment => assessment.id === assessmentId);
+};
+
 const getAssessmentsByStudent = async(studentId, options = {}) => {
     const allStudentsResponses = await dataUtils.readFile(studentResponsesFile);
     const thisStudentResponses = allStudentsResponses.filter((studentResponses) => {
         const { student, completed } = studentResponses;
+
         return (student.id === studentId) && completed;
     });
 
@@ -21,6 +29,7 @@ const getAssessmentsByStudent = async(studentId, options = {}) => {
         }
 
         if (lastRecordOnly && lastRecordOnly === 'true') {
+
             return filteredResponses[filteredResponses.length - 1];
         }
 
@@ -33,5 +42,6 @@ const getAssessmentsByStudent = async(studentId, options = {}) => {
 
 module.exports = {
     getAssessments,
+    getAssessment,
     getAssessmentsByStudent
 }

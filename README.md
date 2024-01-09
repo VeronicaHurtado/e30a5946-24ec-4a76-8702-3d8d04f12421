@@ -12,7 +12,8 @@ on how to answer these questions correctly.
 
 1. Navigate to the root directory of this project.
 2. Install all the dependencies: `npm i`
-3. Run the application: `npm run app`
+3. Run the server: `npm run server`
+4. In a separate tab, run the application: `npm run app`
 
 - To run in development mode: `npm run start:dev`
 - To run in development with debug mode: `npm run start:debug`
