@@ -7,11 +7,14 @@ const feedbackByQuestionTemplate = '' +
 
 const replacementVariables = [
     'studentName',
+    'assessmentCount',
     'assessmentTitle',
     'assessmentCompletedDateTime',
     'correctAnswersNumber',
     'questionsNumber',
     'feedbackByQuestion',
+    'feedbackByStrand',
+    'scoreByAssessment',
     'stem',
     'selected',
     'correct',

@@ -24,35 +24,64 @@ const questions = [
 ];
 
 const diagnostic = async (studentId) => {
-    // ToDo: Handle "Student not found, please provide a diff Id"
     const student = await getStudent(studentId);
-    const assessment = await getAssessmentsByStudent(studentId, { sortByDate: 'completed', lastRecordOnly: 'true' });
 
-    console.log('diagnostic ran!', { student, assessment });
+    if (!student) {
+        // ToDo: Improve "Student not found" error handling
+        console.log('The given Student Id is invalid. Please restart the application and provide a new Id.');
+        // eslint-disable-next-line n/no-process-exit
+        process.exit();
+    }
+
+    const studentAssessment = await getAssessmentsByStudent(studentId, { sortByDate: 'completed', lastRecordOnly: 'true' });
+    const { assessmentId } = studentAssessment;
+    const assessment = await getAssessment(assessmentId);
+    const questions = await getQuestions();
+    const reportData = transformDataToReportFormat({ student, assessment, studentAssessment, questions });
+    const template = await readFile(path.join(templatesPath, 'diagnostic.txt'));
+    const report = setReportVariables(template, reportData);
+    console.info('************************************    Diagnostic report    **********************************');
+    console.info(report);
+    console.info('***********************************************************************************************');
 }
 
 const feedback = async (studentId) => {
-    // ToDo: Handle "Student not found, please provide a diff Id"
     const student = await getStudent(studentId);
+
+    if (!student) {
+        // ToDo: Improve "Student not found" error handling
+        console.log('The given Student Id is invalid. Please restart the application and provide a new Id.');
+        // eslint-disable-next-line n/no-process-exit
+        process.exit();
+    }
+
     const studentAssessment = await getAssessmentsByStudent(studentId, { sortByDate: 'completed', lastRecordOnly: 'true' });
     const { assessmentId } = studentAssessment;
     const assessment = await getAssessment(assessmentId);
     const questions = await getQuestions();
     const reportData = transformDataToReportFormat({ student, assessment, studentAssessment, questions });
     const template = await readFile(path.join(templatesPath, 'feedback.txt'));
-    const report = await setReportVariables(template, reportData);
+    const report = setReportVariables(template, reportData);
 
-    console.info('***********************************************************************************************');
+    console.info('**************************************    Feedback report    **********************************');
     console.info(report);
     console.info('***********************************************************************************************');
 }
 
 const progress = async (studentId) => {
-    // ToDo: Handle "Student not found, please provide a diff Id"
     const student = await getStudent(studentId);
-    const assessments = await getAssessmentsByStudent(studentId);
 
-    console.log('progress ran!', { student, assessments });
+    if (!student) {
+        // ToDo: Improve "Student not found" error handling
+        console.log('The given Student Id is invalid. Please restart the application and provide a new Id.');
+        // eslint-disable-next-line n/no-process-exit
+        process.exit();
+    }
+
+    const studentAssessments = await getAssessmentsByStudent(studentId);
+
+    console.log('The Progress report is still work-in-progress... Ha!');
+    console.log('We do apologise for the inconvenience.');
 }
 
 const reports = {
