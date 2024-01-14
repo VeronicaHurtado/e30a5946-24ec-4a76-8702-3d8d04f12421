@@ -37,7 +37,7 @@ const getAssessment = async (req, res) => {
     } catch (err) {
         return res
             .status(err?.status || 500)
-            .send({ status: 'FAILED', data: { error: err?.message || err } });
+            .send({ status: 'FAILED', error: err?.message || err });
     }
 }
 
@@ -59,7 +59,7 @@ const getAssessmentsByStudent = async (req, res) => {
     } catch (err) {
         return res
             .status(err?.status || 500)
-            .send({ status: 'FAILED', data: { error: err?.message || err } });
+            .send({ status: 'FAILED', error: err?.message || err });
     }
 }
 

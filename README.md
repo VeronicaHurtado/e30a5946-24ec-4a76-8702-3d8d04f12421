@@ -39,6 +39,7 @@ on how to answer these questions correctly.
 - Accessibility
 - CLI best practices
 - Change structure for a more clear separation of concerns: API vs Web/App
+- Add End-to-end tests for the CLI is working as expected.
 
 ### Useful articles
 - [Command-Line Interfaces: Structure & Syntax](https://dev.to/paulasantamaria/command-line-interfaces-structure-syntax-2533)
@@ -49,4 +50,8 @@ on how to answer these questions correctly.
 - [inquirer](https://snyk.io/advisor/npm-package/inquirer)
 - [nodemon](https://snyk.io/advisor/npm-package/nodemon)
 - [eslint](https://snyk.io/advisor/npm-package/eslint)
+- [eslint-plugin-jest](https://snyk.io/advisor/npm-package/eslint-plugin-jest)
 - [body-parser](https://snyk.io/advisor/npm-package/body-parser)
+- [jest](https://snyk.io/advisor/npm-package/jest)
+- [msw](https://snyk.io/advisor/npm-package/msw)
+- [supertest](https://snyk.io/advisor/npm-package/supertest)
