@@ -39,6 +39,7 @@ on how to answer these questions correctly.
 - Accessibility
 - CLI best practices
 - Change structure for a more clear separation of concerns: API vs Web/App
+- Add End-to-end tests for the CLI is working as expected.
 
 ### Useful articles
 - [Command-Line Interfaces: Structure & Syntax](https://dev.to/paulasantamaria/command-line-interfaces-structure-syntax-2533)
