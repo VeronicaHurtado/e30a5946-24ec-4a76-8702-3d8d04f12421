@@ -7,12 +7,20 @@ const getAssessments = async() => {
 };
 
 const getAssessment = async(assessmentId) => {
+    if (!assessmentId) {
+        return;
+    }
+
     const assessments = await dataUtils.readFile(assessmentsFile);
 
     return assessments.find(assessment => assessment.id === assessmentId);
 };
 
 const getAssessmentsByStudent = async(studentId, options = {}) => {
+    if (!studentId) {
+        return;
+    }
+
     const allStudentsResponses = await dataUtils.readFile(studentResponsesFile);
     const thisStudentResponses = allStudentsResponses.filter((studentResponses) => {
         const { student, completed } = studentResponses;
@@ -35,7 +43,6 @@ const getAssessmentsByStudent = async(studentId, options = {}) => {
 
         return filteredResponses;
     }
-
 
     return thisStudentResponses;
 };

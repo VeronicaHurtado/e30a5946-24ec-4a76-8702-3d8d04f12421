@@ -1,5 +1,4 @@
 const express = require('express');
-const indexRouter = require('./routes/index');
 const assessmentsRouter = require('./routes/assessments');
 const questionsRouter = require('./routes/questions');
 const studentsRouter = require('./routes/students');
@@ -9,7 +8,6 @@ const server = express();
 
 server.use(bodyParser.json());
 
-server.use('/', indexRouter);
 server.use('/assessments', assessmentsRouter);
 server.use('/questions', questionsRouter);
 server.use('/students', studentsRouter);
