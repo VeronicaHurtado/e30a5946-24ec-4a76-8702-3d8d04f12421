@@ -49,4 +49,8 @@ on how to answer these questions correctly.
 - [inquirer](https://snyk.io/advisor/npm-package/inquirer)
 - [nodemon](https://snyk.io/advisor/npm-package/nodemon)
 - [eslint](https://snyk.io/advisor/npm-package/eslint)
+- [eslint-plugin-jest](https://snyk.io/advisor/npm-package/eslint-plugin-jest)
 - [body-parser](https://snyk.io/advisor/npm-package/body-parser)
+- [jest](https://snyk.io/advisor/npm-package/jest)
+- [msw](https://snyk.io/advisor/npm-package/msw)
+- [supertest](https://snyk.io/advisor/npm-package/supertest)
