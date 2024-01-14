@@ -48,10 +48,11 @@ on how to answer these questions correctly.
 ## Snyk Advisor
 - [express](https://snyk.io/advisor/npm-package/express)
 - [inquirer](https://snyk.io/advisor/npm-package/inquirer)
-- [nodemon](https://snyk.io/advisor/npm-package/nodemon)
+- [body-parser](https://snyk.io/advisor/npm-package/body-parser)
 - [eslint](https://snyk.io/advisor/npm-package/eslint)
 - [eslint-plugin-jest](https://snyk.io/advisor/npm-package/eslint-plugin-jest)
-- [body-parser](https://snyk.io/advisor/npm-package/body-parser)
+- [nodemon](https://snyk.io/advisor/npm-package/nodemon)
 - [jest](https://snyk.io/advisor/npm-package/jest)
+- [@jest-mock/express](https://snyk.io/advisor/npm-package/@jest-mock/express)
 - [msw](https://snyk.io/advisor/npm-package/msw)
 - [supertest](https://snyk.io/advisor/npm-package/supertest)
