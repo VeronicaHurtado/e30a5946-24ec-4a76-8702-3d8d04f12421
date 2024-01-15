@@ -5,7 +5,12 @@ const {
     getAssessmentsByStudent,
     getQuestions
 } = require('./queries');
-const { transformDataToReportFormat, readFile, setReportVariables } = require('./utils/report.util');
+const {
+    transformStudentResponses,
+    transformDataToReportFormat,
+    readFile,
+    setReportVariables
+} = require('./utils/report.util');
 const path = require('path');
 const templatesPath = path.join(process.cwd(), '/src/templates');
 
@@ -79,9 +84,16 @@ const progress = async (studentId) => {
     }
 
     const studentAssessments = await getAssessmentsByStudent(studentId);
+    const assessment = await getAssessment(studentAssessments[0].assessmentId);
+    const questions = await getQuestions();
+    const { studentScores, scoreByAssessment} = transformStudentResponses(studentAssessments, questions.length);
+    const reportData = transformDataToReportFormat({ student, assessment, studentScores, scoreByAssessment });
+    const template = await readFile(path.join(templatesPath, 'progress.txt'));
+    const report = setReportVariables(template, { ...reportData, scoreByAssessment });
 
-    console.log('The Progress report is still work-in-progress... Ha!');
-    console.log('We do apologise for the inconvenience.');
+    console.info('**************************************    Progress report    **********************************');
+    console.info(report);
+    console.info('***********************************************************************************************');
 }
 
 const reports = {

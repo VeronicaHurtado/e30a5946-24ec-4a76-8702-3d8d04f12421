@@ -1,15 +1,22 @@
 const fs = require('node:fs/promises');
+
 const feedbackByQuestionTemplate = '' +
     'Question: [stem]\n' +
     'Your answer: [selected]\n' +
     'Right answer: [correct]\n' +
     'Hint: [hint]';
 
+const scoreByQuestionTemplate = '\nDate: [assignedDate], Raw Score: [rawScore] out of [assessmentTotalScore]';
+
 const replacementVariables = [
     'studentName',
-    'assessmentCount',
     'assessmentTitle',
     'assessmentCompletedDateTime',
+    'assessmentAttempts',
+    'assessmentTotalScore',
+    'scoreStatement',
+    'assignedDate',
+    'rawScore',
     'correctAnswersNumber',
     'questionsNumber',
     'feedbackByQuestion',
@@ -27,15 +34,15 @@ const arrayToObject = (array) =>
         return obj
     }, {});
 
-const transformStudentResponses = (studentResponses, questions) => {
+const transformResponses = (responses, questions) => {
     const correctAnswers = [];
     const incorrectAnswers = [];
     const questionsObject = arrayToObject(questions);
     let feedbackByQuestion = '';
 
-    studentResponses.map(({ questionId, response }) => {
-        const { stem, strand, config } = questionsObject[questionId];
-        const { key, hint } = config;
+    responses.map(({ questionId, response }) => {
+        const {stem, strand, config} = questionsObject[questionId];
+        const {key, hint} = config;
         const question = {
             stem,
             strand,
@@ -54,21 +61,47 @@ const transformStudentResponses = (studentResponses, questions) => {
 
     return { correctAnswers, incorrectAnswers, feedbackByQuestion };
 };
-const transformDataToReportFormat = ({ student, assessment, studentAssessment, questions }) => {
+
+const transformStudentResponses = (studentResponses, assessmentTotalScore) => {
+    const studentScores = [];
+    let scoreByAssessment = '';
+
+    studentResponses.map(({ assigned, results }) => {
+        const { rawScore } = results;
+        const score = {
+            assignedDate: assigned,
+            rawScore,
+            assessmentTotalScore
+        }
+        studentScores.push(score);
+        scoreByAssessment = scoreByAssessment + setReportVariables(scoreByQuestionTemplate, score);
+    })
+
+    return { studentScores, scoreByAssessment }
+};
+
+const transformDataToReportFormat = ({ student, assessment, studentAssessment = {}, questions = [], studentScores = [] }) => {
     const { firstName, lastName } = student;
     const { name } = assessment;
-    const { completed, responses } = studentAssessment;
-
-    const { correctAnswers, incorrectAnswers, feedbackByQuestion } = transformStudentResponses(responses, questions);
+    const { completed, responses = [] } = studentAssessment;
+    const scoreDiff = studentScores.length && (studentScores[studentScores.length - 1].rawScore - studentScores[0].rawScore);
+    const scoreStatement = scoreDiff > 0? `${scoreDiff} more correct` : `${scoreDiff} less correct`;
+    const {
+        correctAnswers,
+        incorrectAnswers,
+        feedbackByQuestion
+    } = responses.length && transformResponses(responses, questions) || {};
 
     return {
         assessmentTitle: name,
         assessmentCompletedDateTime: completed, //FixMe: format
-        correctAnswersNumber: correctAnswers.length,
+        correctAnswersNumber: correctAnswers && correctAnswers.length,
         incorrectAnswers,
         questionsNumber: responses.length,
         feedbackByQuestion,
-        studentName: `${ firstName } ${ lastName }`
+        studentName: `${ firstName } ${ lastName }`,
+        assessmentAttempts: studentScores.length,
+        scoreStatement
     };
 };
 
@@ -91,6 +124,7 @@ const setReportVariables = (template, reportData) => {
 };
 
 module.exports = {
+    transformStudentResponses,
     transformDataToReportFormat,
     readFile,
     setReportVariables
